@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Search extends React.Component {
   constructor(props) {
@@ -7,8 +8,24 @@ class Search extends React.Component {
       genres: []
     };
   }
+
   getGenres() {
-    //make an axios request in this component to get the list of genres from your endpoint GET GENRES
+    axios.get('/genres')
+         .then(response => {
+            console.log('GET request for genre to localhost');
+            this.setState({
+              genres: response.data
+            });
+
+            console.log('The genres', this.state.genres);
+         })
+         .catch(err => {
+            console.error('Error from localhost', err);
+         });
+  }
+
+  componentDidMount() {
+    this.getGenres();
   }
 
   render() {
@@ -21,10 +38,11 @@ class Search extends React.Component {
         {/* How can you tell which option has been selected from here? */}
 
         <select>
-          <option value="theway">The Way</option>
-          <option value="thisway">This Way</option>
-          <option value="thatway">That Way</option>
+          {this.state.genres.map( (genre) => {
+            return(<option key={genre.id}>{genre.name}</option>)
+          })}
         </select>
+
         <br/><br/>
 
         <button>Search</button>

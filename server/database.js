@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 const mysqlConfig = require('./config.js');
 
-const connection = mysql.createConnection(mysqlConfig);
+const db = mysql.createConnection(mysqlConfig);
 
 const getAllFavorites = function(callback) {
-  // get favorites from the database
+  
 };
 
 const saveFavorite = function(callback) {

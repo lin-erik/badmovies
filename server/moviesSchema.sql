@@ -2,12 +2,11 @@ CREATE DATABASE IF NOT EXISTS badmovies;
 
 USE badmovies;
 
-CREATE TABLE users (
-  id INT AUTO_INCREMENT,
-  username VARCHAR(255)
-);
-
 CREATE TABLE favorites (
-  user_id INT,
-  movie_id INT
+  movie_id INT,
+  title VARCHAR(255),
+  desc VARCHAR(255),
+  image VARCHAR(255),
+  release VARCHAR(255),
+  rating INT
 );

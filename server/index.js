@@ -12,20 +12,18 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/search', function(req, res) {
     // get the search genre
+    console.log('Search body', req.query.genreId);
 
-    // https://api.themoviedb.org/3/discover/movie
-
-    // and sort them by horrible votes using the search parameters in the API
+    apiHelpers.search(req.query.genreId, (err, data) => {
+      res.send(data);
+    });
 });
 
 app.get('/genres', function(req, res) {
     // make an axios request to get the list of official genres
     apiHelpers.genre( (err, data) => {
         res.send(data);
-    })
-    // use this endpoint, which will also require your API key: https://api.themoviedb.org/3/genre/movie/list
-
-    // send back
+    });
 });
 
 app.post('/save', function(req, res) {

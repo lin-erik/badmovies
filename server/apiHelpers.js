@@ -15,14 +15,23 @@ module.exports = {
       })
       .catch(err => {
         console.error('Error getting genres', err)
+      });
+  },
+
+  search: function(genreId, cb) {
+    axios.get('https://api.themoviedb.org/3/discover/movie', {
+      params: {
+        api_key: API_KEY,
+        with_genres: genreId,
+        sort_by: 'popularity.asc'
+      }
+    })
+      .then(response => {
+        console.log('Processing search GET');
+        cb(null, response.data);
+      })
+      .catch(err => {
+        console.error('Error searching');
       })
   }
 }
-
-
-
-// FOR REFERENCE:
-// https://www.themoviedb.org/account/signup
-// https://developers.themoviedb.org/3/discover/movie-discover
-
-// Don't forget to export your functions and require them within your server file
